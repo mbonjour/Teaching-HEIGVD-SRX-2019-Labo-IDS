@@ -288,7 +288,7 @@ alert tcp any any -> any any (msg:"Mon nom!"; content:"Rubinstein"; sid:4000015;
 
 ---
 
-**Reponse :**  
+Cette règle permet d'émettre une alerte lorsque un paquet tcp est envoyé depuis n'importe quelle IP et n'importe quel port vers n'importe quel IP et n'importe quel port (tout les paquets TCPs). Cette alerte sera déclenchée uniquement si le paquet contient Rubinstein. Le sid permet de set un id pour la règle et nous commençons vers 4000000 pour éviter les collisions avec d'autres règles et rev est le numéro de révision (version) de la règle. Cette alerte aura comme message Mon nom!    
 
 ---
 
