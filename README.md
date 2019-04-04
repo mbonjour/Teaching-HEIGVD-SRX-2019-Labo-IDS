@@ -300,34 +300,32 @@ sudo snort -c myrules.rules -i eth0
 
 **Question 2: Que voyez-vous quand le logiciel est lancé ? Qu'est-ce que ça vaut dire ?**
 
+
+On peut voir les paramètres d'exécutions du programme ainsi qu'un tableau qui résume les règles que l'on utilise dans la capture. Ici on voit que notre règle cherche du TCP avec any comme source et destination.
+
 ---
-
-**Reponse :**  
-
----
-
 Aller à un site web contenant votre nom ou votre mot clé que vous avez choisi dans son text (il faudra chercher un peu pour trouver un site en http...). Ensuite, arrêter Snort avec `CTRL-C`.
+
+---
 
 **Question 3: Que voyez-vous ?**
 
 ---
 
-**Reponse :**  
+On peut observer un résumé des alertes qui ont été trouvé ainsi que les différents paquets analysés.
 
 ---
 
 Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il y ait des alertes pour votre nom.
 
+---
+
 **Question 4: A quoi ressemble l'alerte ? Qu'est-ce que chaque champ veut dire ?**
 
 ---
-
-**Reponse :**  
+On a tout d'abord le SID:version ainsi que le message de l'alerte. On retrouve ensuite la priorité de l'alerte ainsi que son timestamp. Ensuite des détails sur la trame TCP sont donnés tels que le numéro de la fenêtre ainsi que le nom de la séquence, etc... 
 
 ---
-
-
---
 
 ### Detecter une visite à Wikipedia
 
@@ -337,9 +335,8 @@ Ecrire une règle qui journalise (sans alerter) un message à chaque fois que Wi
 
 ---
 
-**Reponse :**  
-
----
+`log tcp 10.192.109.83 any -> 91.198.174.192 any (sid:4000007; rev:1;)`
+On log les paquets tcp entre notre machine réelle (10.192.109.83) et wikipédia (91.198.174.192). Toutes connexions est loguées dans `/var/log/snort/snort.log.*`.
 
 --
 
@@ -351,7 +348,8 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-**Reponse :**  
+`alert icmp any any -> 10.192.109.83 any (msg:"Ping sur moi !"; sid:4000300; rev:1)`
+Pour identifier seulement les pings entrants il suffit de mettre notre adresse ip du coté de la destination. Les paquets icmp entrants (ECHO REQUEST uniquement) sont inscrits dans alert ainsi que dans le snort.log correspondant à cette règle en format paquet.
 
 ---
 
@@ -365,7 +363,8 @@ Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
 ---
 
-**Reponse :**  
+On a changé la flèche en flèche bidirictionnelle :  
+`alert icmp any any <> 10.192.109.83 any (msg:"Ping sur moi !"; sid:4000300; rev:1)`
 
 ---
 
