@@ -303,6 +303,8 @@ sudo snort -c myrules.rules -i eth0
 
 On peut voir les paramètres d'exécutions du programme ainsi qu'un tableau qui résume les règles que l'on utilise dans la capture. Ici on voit que notre règle cherche du TCP avec any comme source et destination.
 
+
+![Snort entree](images/q3EntreeSnort.jpg)
 ---
 Aller à un site web contenant votre nom ou votre mot clé que vous avez choisi dans son text (il faudra chercher un peu pour trouver un site en http...). Ensuite, arrêter Snort avec `CTRL-C`.
 
@@ -313,6 +315,7 @@ Aller à un site web contenant votre nom ou votre mot clé que vous avez choisi 
 ---
 
 On peut observer un résumé des alertes qui ont été trouvé ainsi que les différents paquets analysés.
+![Sortie snort](images/q3SortieSnort.jpg)
 
 ---
 
@@ -325,6 +328,7 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 ---
 On a tout d'abord le SID:version ainsi que le message de l'alerte. On retrouve ensuite la priorité de l'alerte ainsi que son timestamp. Ensuite des détails sur la trame TCP sont donnés tels que le numéro de la fenêtre ainsi que le nom de la séquence, etc... 
 
+![Alerte mon nom](images/q4Nom.jpg)
 ---
 
 ### Detecter une visite à Wikipedia
@@ -351,6 +355,7 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 `alert icmp any any -> 10.192.109.83 any (msg:"Ping sur moi !"; sid:4000300; rev:1)`
 Pour identifier seulement les pings entrants il suffit de mettre notre adresse ip du coté de la destination. Les paquets icmp entrants (ECHO REQUEST uniquement) sont inscrits dans alert ainsi que dans le snort.log correspondant à cette règle en format paquet.
 
+![Alerte ping externe](images/pingAlert.jpg)
 ---
 
 --
@@ -380,7 +385,9 @@ Essayer d'écrire une règle qui Alerte qu'une tentative de session SSH a été 
 ---
 
 **Reponse :**  
+`alert tcp any any -> 10.192.109.83 22 (msg:"SSH sur moi !"; sid:4000400 ; rev:1)`
 
+![Alerte SSH](images/sshAlert.jpg)
 ---
 
 --
