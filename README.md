@@ -368,8 +368,8 @@ Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
 ---
 
-On a changé la flèche en flèche bidirictionnelle :  
-`alert icmp any any <> 10.192.109.83 any (msg:"Ping sur moi !"; sid:4000300; rev:1)`
+On a changé la flèche en flèche bidirectionnelle :  
+`alert icmp any any <> 10.192.109.83 any (msg:"Ping sur moi ou depuis moi !"; sid:4000301; rev:1)`
 
 ---
 
@@ -401,7 +401,7 @@ Lancer Wireshark et faire une capture du trafic sur l'interface connectée au br
 ---
 
 **Reponse :**  
-
+Il s'agit de l'option -r suivi du fichier pcap ou log pour pouvoir l'analyser grâce à Snort et comme d'habitude pas oublier le -c pour les règles.
 ---
 
 Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshark.
@@ -410,7 +410,8 @@ Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshar
 
 ---
 
-**Reponse :**  
+**Reponse :** 
+Non Snort ne distingue pas les captures à l'analyse en temps réel, en effet les alertes apparaissent dans le fichier d'alertes et les logs sont fait si besoin. Il n'y a à priori pas de changements entres ces 2 différents types d'analyses. 
 
 ---
 
