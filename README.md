@@ -352,10 +352,10 @@ Ecrire une règle qui alerte à chaque fois que votre système reçoit un ping d
 
 ---
 
-`alert icmp any any -> 10.192.109.83 any (msg:"Ping sur moi !"; sid:4000300; rev:1)`
-Pour identifier seulement les pings entrants il suffit de mettre notre adresse ip du coté de la destination. Les paquets icmp entrants (ECHO REQUEST uniquement) sont inscrits dans alert ainsi que dans le snort.log correspondant à cette règle en format paquet.
+`alert icmp any any -> 10.192.109.83 any (itype:8; msg:"Ping sur moi !"; sid:4000300; rev:1)`
+Pour identifier seulement les pings entrants il suffit de mettre notre adresse ip du coté de la destination et de spécifier qu'on ne veut que les paquets de type ECHO REQUEST (itype:8 car le type de echo request est 8). Les paquets icmp entrants (ECHO REQUEST uniquement) sont inscrits dans alert ainsi que dans le snort.log correspondant à cette règle en format paquet.
 
-![Alerte ping externe](images/pingAlert.jpg)
+![Alerte ping externe](images/pingAlert.png)
 ---
 
 --
@@ -368,7 +368,7 @@ Modifier votre règle pour que les pings soient détectés dans les deux sens.
 
 ---
 
-On a changé la flèche en flèche bidirectionnelle :  
+On a changé la flèche en flèche bidirectionnelle et on a enlevé la contrainte du type icmp :  
 `alert icmp any any <> 10.192.109.83 any (msg:"Ping sur moi ou depuis moi !"; sid:4000301; rev:1)`
 
 ---
