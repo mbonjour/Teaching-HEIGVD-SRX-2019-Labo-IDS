@@ -402,7 +402,7 @@ Lancer Wireshark et faire une capture du trafic sur l'interface connectée au br
 
 **Reponse :**  
 Il s'agit de l'option -r suivi du fichier pcap ou log pour pouvoir l'analyser grâce à Snort et comme d'habitude pas oublier le -c pour les règles.
----
+
 
 Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshark.
 
